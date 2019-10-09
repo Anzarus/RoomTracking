@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>End_time_before_room_closes</fullName>
+    <active>true</active>
+    <errorConditionFormula>Room__r.Room_Closes_at__c &lt; Ends_at__c</errorConditionFormula>
+    <errorDisplayField>Ends_at__c</errorDisplayField>
+    <errorMessage>End time of meeting should be before room closes</errorMessage>
+</ValidationRule>

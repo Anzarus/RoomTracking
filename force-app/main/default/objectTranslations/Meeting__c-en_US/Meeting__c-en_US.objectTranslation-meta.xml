@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Meeting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Meetings</value>
+    </caseValues>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- End time of meeting should be before room closes --></errorMessage>
+        <name>End_time_before_room_closes</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You could not set meeting to past --></errorMessage>
+        <name>Meeting_not_before_now</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Start time of meeting should be after room opens --></errorMessage>
+        <name>Start_time_after_room_open</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Start time should be before end time and should be in one day. --></errorMessage>
+        <name>Start_time_before_end_time</name>
+    </validationRules>
+</CustomObjectTranslation>

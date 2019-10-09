@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Close_time_should_be_bigger_than_open</fullName>
+    <active>true</active>
+    <errorConditionFormula>Room_Closes_at__c &lt;= Room_Opens_at__c</errorConditionFormula>
+    <errorMessage>Room closes time should be after room opens time</errorMessage>
+</ValidationRule>
