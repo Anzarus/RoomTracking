@@ -1,0 +1,21 @@
+<!--
+ - Created by AntonAntoniuk on 10.10.2019.
+ -->
+
+<aura:component description="DateChangeComponent"
+                implements="flexipage:availableForAllPageTypes">
+
+    <aura:registerEvent name="currentDateEvent" type="c:SendDateEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.setToday}"/>
+
+    <dl class="slds-list_horizontal slds-wrap" >
+        <lightning:input label="" variant="label-hidden" aura:id="dateInput" type="date" onchange="{!c.fireSendDateEvent}"/>
+
+        <lightning:buttonGroup>
+            <lightning:button iconName="utility:left" onclick="{!c.setYesterday}"/>
+            <lightning:button iconName="utility:right" onclick="{!c.setTomorrow}"/>
+            <lightning:button variant="brand" label="Today" onclick="{!C.setToday}"/>
+        </lightning:buttonGroup>
+    </dl>
+
+</aura:component>

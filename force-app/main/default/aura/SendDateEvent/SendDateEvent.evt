@@ -1,0 +1,7 @@
+<!--
+ - Created by AntonAntoniuk on 10.10.2019.
+ -->
+
+<aura:event type="COMPONENT" description="SendDateEvent">
+    <aura:attribute name="currentDate" type="String"/>
+</aura:event>

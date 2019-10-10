@@ -1,0 +1,23 @@
+<!--
+ - Created by AntonAntoniuk on 10.10.2019.
+ -->
+
+<aura:component description="MeetingList"
+                controller="MeetingListComponentController"
+                implements="flexipage:availableForAllPageTypes, force:hasRecordId">
+
+    <aura:attribute name="Room" type="Room__c"/>
+    <aura:attribute name="TodayMeeting" type="List"/>
+    <aura:attribute name="currentDate" type="String"/>
+
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="currentDateEvent" event="c:SendDateEvent" action="{!c.handleDateEvent}"/>
+
+    <c:DateChangeComponent/>
+
+    {!v.currentDate}
+
+
+
+    <c:RequestComponent aura:id="requestCmp" parentCmp="{!this}"/>
+</aura:component>
