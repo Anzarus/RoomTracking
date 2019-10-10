@@ -32,15 +32,14 @@ public with sharing class MeetingTriggerHandler {
         for (Meeting__c newMeeting : newMeetings) {
             if (existMeetingsByDates.containsKey(newMeeting.When__c)) {
                 for (Meeting__c existMeeting : existMeetingsByDates.get(newMeeting.When__c)) {
-                    if (newMeeting.Starts_at__c < existMeeting.Ends_at__c) {
+                    if (newMeeting.Starts_at__c < existMeeting.Starts_at__c
+                            && newMeeting.Ends_at__c > existMeeting.Starts_at__c) {
                         throw new MeetingException('You should choose another time cause it`s busy!');
-                    } else if (newMeeting.Ends_at__c > existMeeting.Starts_at__c) {
-                        throw new MeetingException('You should choose another time cause it`s busy!');
-                    } else if (newMeeting.Starts_at__c > existMeeting.Starts_at__c
-                            && newMeeting.Ends_at__c < existMeeting.Ends_at__c) {
-                        throw new MeetingException('You should choose another time cause it`s busy!');
-                    } else if (newMeeting.Starts_at__c < existMeeting.Starts_at__c
+                    } else if (newMeeting.Starts_at__c < existMeeting.Ends_at__c
                             && newMeeting.Ends_at__c > existMeeting.Ends_at__c) {
+                        throw new MeetingException('You should choose another time cause it`s busy!');
+                    } else if (newMeeting.Starts_at__c >= existMeeting.Starts_at__c
+                            && newMeeting.Ends_at__c <= existMeeting.Ends_at__c) {
                         throw new MeetingException('You should choose another time cause it`s busy!');
                     }
                 }
@@ -48,6 +47,7 @@ public with sharing class MeetingTriggerHandler {
         }
     }
 
+    @TestVisible
     class MeetingException extends Exception {
     }
 }

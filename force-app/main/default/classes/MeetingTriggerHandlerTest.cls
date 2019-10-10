@@ -9,7 +9,7 @@ private class MeetingTriggerHandlerTest {
         UnitOfWork unitOfWork = new UnitOfWork(new Set<SObjectType>{
                 Room__c.SObjectType,
                 Meeting__c.SObjectType
-        });//todo unitOfWork
+        });
 
         Room__c room;
         Time roomOpenTime = Time.newInstance(8, 0, 0, 0);
@@ -61,7 +61,128 @@ private class MeetingTriggerHandlerTest {
         };
         insert meetings;
 
-        System.assertEquals(8, [SELECT Id FROM Meeting__c WHERE When__c = :Date.today()].size());
+        System.assertEquals(53, [SELECT Id FROM Meeting__c WHERE When__c = :Date.today().addMonths(1)].size());
         System.assertEquals(8, [SELECT Id FROM Meeting__c WHERE Room__c = :room.Id].size());
+    }
+
+    @IsTest
+    static void testSettingMeetingInsideExistMeetingTime() {
+        Room__c room = [
+                SELECT Id
+                FROM Room__c
+                LIMIT 1
+        ];
+
+        Meeting__c meeting = new Meeting__c
+                (
+                        When__c = Date.today().addMonths(1),
+                        Starts_at__c = Time.newInstance(8, 15, 0, 0),
+                        Ends_at__c = Time.newInstance(8, 30, 0, 0),
+                        Room__c = room.Id
+                );
+        Boolean dmlFail = false;
+        try {
+            insert meeting;
+        } catch (DmlException e) {
+            dmlFail = true;
+        }
+        System.assertEquals(true, dmlFail, 'You should choose another time cause it`s busy!');
+    }
+
+    @IsTest
+    static void testSettingMeetingOutsideExistMeetingTime() {
+        Room__c room = [
+                SELECT Id
+                FROM Room__c
+                LIMIT 1
+        ];
+
+        Meeting__c meeting = new Meeting__c
+                (
+                        When__c = Date.today().addMonths(1),
+                        Starts_at__c = Time.newInstance(9, 45, 0, 0),
+                        Ends_at__c = Time.newInstance(10, 45, 0, 0),
+                        Room__c = room.Id
+                );
+        Boolean dmlFail = false;
+        try {
+            insert meeting;
+        } catch (DmlException e) {
+            dmlFail = true;
+        }
+        System.assertEquals(true, dmlFail, 'You should choose another time cause it`s busy!');
+    }
+
+    @IsTest
+    static void testSettingMeetingWithEndCollisionWithExistMeetingTime() {
+        Room__c room = [
+                SELECT Id
+                FROM Room__c
+                LIMIT 1
+        ];
+
+        Meeting__c meeting = new Meeting__c
+                (
+                        When__c = Date.today().addMonths(1),
+                        Starts_at__c = Time.newInstance(9, 15, 0, 0),
+                        Ends_at__c = Time.newInstance(10, 10, 0, 0),
+                        Room__c = room.Id
+                );
+        Boolean dmlFail = false;
+        try {
+            insert meeting;
+        } catch (DmlException e) {
+            dmlFail = true;
+        }
+        System.assertEquals(true, dmlFail, 'You should choose another time cause it`s busy!');
+    }
+
+    @IsTest
+    static void testSettingMeetingWithStartCollisionWithExistMeetingTime() {
+        Room__c room = [
+                SELECT Id
+                FROM Room__c
+                LIMIT 1
+        ];
+
+        Meeting__c meeting = new Meeting__c
+                (
+                        When__c = Date.today().addMonths(1),
+                        Starts_at__c = Time.newInstance(8, 15, 0, 0),
+                        Ends_at__c = Time.newInstance(8, 45, 0, 0),
+                        Room__c = room.Id
+                );
+
+        Boolean dmlFail = false;
+        try {
+            insert meeting;
+        } catch (DmlException e) {
+            dmlFail = true;
+        }
+        System.assertEquals(true, dmlFail, 'You should choose another time cause it`s busy!');
+    }
+
+    @IsTest
+    static void testSettingMeetingAtTheSameExistMeetingTime() {
+        Room__c room = [
+                SELECT Id
+                FROM Room__c
+                LIMIT 1
+        ];
+
+        Meeting__c meeting = new Meeting__c
+                (
+                        When__c = Date.today().addMonths(1),
+                        Starts_at__c = Time.newInstance(8, 0, 0, 0),
+                        Ends_at__c = Time.newInstance(8, 30, 0, 0),
+                        Room__c = room.Id
+                );
+        Boolean dmlFail = false;
+        try {
+            insert meeting;
+        } catch (DmlException e) {
+            dmlFail = true;
+        }
+        System.assertEquals(true, dmlFail, 'You should choose another time cause it`s busy!');
     }
 }
