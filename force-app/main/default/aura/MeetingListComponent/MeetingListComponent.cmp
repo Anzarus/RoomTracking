@@ -16,11 +16,15 @@
     <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
     <aura:handler name="currentDateEvent" event="c:SendDateEvent" action="{!c.handleDateEvent}"/>
 
-    <c:DateChangeComponent/>
 
-    <aura:If  isTrue="{!v.renderScale}">
-        <c:TimeScaleComponent RoomOpensAt="{!v.Room.Room_Opens_at__c}"
-                              RoomClosesAt="{!v.Room.Room_Closes_at__c}"
-                              TodayMeetings="{!v.TodayMeetings}"/>
-    </aura:If>
+    <div class="slds-card">
+        <c:DateChangeComponent/>
+
+        <aura:If isTrue="{!v.renderScale}">
+            <c:TimeScaleComponent RoomOpensAt="{!v.Room.Room_Opens_at__c}"
+                                  RoomClosesAt="{!v.Room.Room_Closes_at__c}"
+                                  TodayMeetings="{!v.TodayMeetings}"/>
+        </aura:If>
+    </div>
+
 </aura:component>

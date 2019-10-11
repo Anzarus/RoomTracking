@@ -12,15 +12,12 @@
     <aura:handler name="init" value="{!this}" action="{!c.formDayList}"/>
 
     <aura:iteration var="partOfScale" items="{!v.parts}">
-<!--                <aura:if isTrue="{!partOfScale.isMeeting}">-->
-<!--                    I`m meeting <c:ScalePartComponent isMeeting="{!partOfScale.isMeeting}" size="{!partOfScale.size}"/>-->
-<!--                    <aura:set attribute="else">-->
-<!--        I`m free time-->
-        <c:ScalePartComponent isMeeting="{!partOfScale.isMeeting}"
-                              size="{!partOfScale.size}"/>
-<!--                    </aura:set>-->
-<!--                </aura:if>-->
-        <br/>
+        <div class="slds-border--bottom">
+            <c:ScalePartComponent isMeeting="{!partOfScale.isMeeting}"
+                                  size="{!partOfScale.size}"
+                                  startTime="{!partOfScale.startTime}"/>
+<!--            <br/>-->
+        </div>
     </aura:iteration>
 
 </aura:component>

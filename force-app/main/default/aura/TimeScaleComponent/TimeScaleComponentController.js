@@ -4,6 +4,6 @@
 
 ({
   formDayList:function(cmp, event, helper) {
-    helper.formScale(cmp, helper);
+    helper.formFreeAndBusyTime(cmp, helper);
   }
 });

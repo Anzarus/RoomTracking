@@ -3,7 +3,7 @@
  */
 
 ({
-  formScale: function(cmp, helper) {
+  formFreeAndBusyTime: function(cmp, helper) {
     const timeBegin = cmp.get("v.RoomOpensAt");
     const timeEnd = cmp.get("v.RoomClosesAt");
     const timeScaleDivision = 900000; //15 min
@@ -14,27 +14,11 @@
     const meetingsByStartTime = helper.formMeetingsByStartTime(meetings);
 
     for (let i = timeBegin; i < timeEnd;) {
-      console.log(i);
-      let partOfScale = { isMeeting: false, size: 0 };
+      let partOfScale = { isMeeting: false, size: 0, startTime: i };
       if (meetingsByStartTime.has(i)) {
-        let counter = 0;
-        let meetingStartAt = i;
-        while (i < meetingsByStartTime.get(meetingStartAt).Ends_at__c) {
-          counter++;
-          i += timeScaleDivision;
-        }
-        partOfScale.isMeeting = true;
-        partOfScale.size = counter;
+        i = this.setMeetingCmp(i, meetingsByStartTime, timeScaleDivision, partOfScale);
       } else {
-        let counter = 0;
-        while (!meetingsByStartTime.has(i) && i < timeEnd) {
-          counter++;
-          i += timeScaleDivision;
-          console.log(counter + ":" + i);
-        }
-        console.log(i);
-        partOfScale.isMeeting = false;
-        partOfScale.size = counter;
+        i = this.setFreeTime(meetingsByStartTime, i, timeEnd, timeScaleDivision, partOfScale);
       }
       partsOfScale.push(partOfScale);
     }
@@ -48,5 +32,28 @@
       meetingsByStartTime.set(meetings[i].Starts_at__c, meetings[i]);
     }
     return meetingsByStartTime;
+  },
+
+  setMeetingCmp: function(i, meetingsByStartTime, timeScaleDivision, partOfScale) {
+    let counter = 0;
+    let meetingStartAt = i;
+    while (i < meetingsByStartTime.get(meetingStartAt).Ends_at__c) {
+      counter++;
+      i += timeScaleDivision;
+    }
+    partOfScale.isMeeting = true;
+    partOfScale.size = counter;
+    return i;
+  },
+
+  setFreeTime: function(meetingsByStartTime, i, timeEnd, timeScaleDivision, partOfScale) {
+    let counter = 0;
+    while (!meetingsByStartTime.has(i) && i < timeEnd) {
+      counter++;
+      i += timeScaleDivision;
+    }
+    partOfScale.isMeeting = false;
+    partOfScale.size = counter;
+    return i;
   }
 });

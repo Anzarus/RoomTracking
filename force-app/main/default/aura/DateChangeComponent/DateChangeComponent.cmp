@@ -7,13 +7,16 @@
     <aura:registerEvent name="currentDateEvent" type="c:SendDateEvent"/>
     <aura:handler name="init" value="{!this}" action="{!c.setToday}"/>
 
-    <dl class="slds-list_horizontal slds-wrap" >
-        <lightning:input label="" variant="label-hidden" aura:id="dateInput" type="date" onchange="{!c.fireSendDateEvent}"/>
+    <dl class="slds-list_horizontal slds-wrap">
+        <div class="slds-col slds-nowrap">
+            <lightning:input label="" variant="label-hidden" aura:id="dateInput" type="date"
+                             onchange="{!c.fireSendDateEvent}"/>
+        </div>
 
         <lightning:buttonGroup>
             <lightning:button iconName="utility:left" onclick="{!c.setYesterday}"/>
             <lightning:button iconName="utility:right" onclick="{!c.setTomorrow}"/>
-            <lightning:button variant="brand" label="Today" onclick="{!C.setToday}"/>
+            <lightning:button variant="brand" label="Today" onclick="{!c.setToday}"/>
         </lightning:buttonGroup>
     </dl>
 
