@@ -7,8 +7,7 @@
     helper.getRoomAndTodayMeetings(cmp);
   },
 
-  handleDateEvent:function(cmp, event) {
-    const currentDate = event.getParam("currentDate");
-    cmp.set("v.currentDate", currentDate);
+  handleDateEvent:function(cmp, event, helper) {
+    helper.getMeetingsForCurrentDate(cmp, event);
   }
 });

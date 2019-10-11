@@ -3,6 +3,6 @@
     <fullName>Meeting_not_before_now</fullName>
     <active>true</active>
     <errorConditionFormula>When__c &lt;= TODAY() 
-||  Starts_at__c &lt;  TIMENOW()</errorConditionFormula>
+|| (Starts_at__c &lt;  TIMENOW() &amp;&amp; When__c = TODAY())</errorConditionFormula>
     <errorMessage>You could not set meeting to past</errorMessage>
 </ValidationRule>

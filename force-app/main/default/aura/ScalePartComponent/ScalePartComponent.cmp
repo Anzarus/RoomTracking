@@ -1,0 +1,12 @@
+<!--
+ - Created by AntonAntoniuk on 11.10.2019.
+ -->
+
+<aura:component description="ScalePartComponent">
+
+    <aura:attribute name="isMeeting" type="Boolean"/>
+    <aura:attribute name="size" type="Integer"/>
+
+
+
+</aura:component>

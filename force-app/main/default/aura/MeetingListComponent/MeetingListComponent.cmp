@@ -6,18 +6,21 @@
                 controller="MeetingListComponentController"
                 implements="flexipage:availableForAllPageTypes, force:hasRecordId">
 
+    <c:RequestComponent aura:id="requestCmp" parentCmp="{!this}"/>
+
     <aura:attribute name="Room" type="Room__c"/>
-    <aura:attribute name="TodayMeeting" type="List"/>
+    <aura:attribute name="TodayMeetings" type="List"/>
     <aura:attribute name="currentDate" type="String"/>
+    <aura:attribute name="renderScale" type="Boolean" default="false"/>
 
     <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
     <aura:handler name="currentDateEvent" event="c:SendDateEvent" action="{!c.handleDateEvent}"/>
 
     <c:DateChangeComponent/>
 
-    {!v.currentDate}
-
-
-
-    <c:RequestComponent aura:id="requestCmp" parentCmp="{!this}"/>
+    <aura:If  isTrue="{!v.renderScale}">
+        <c:TimeScaleComponent RoomOpensAt="{!v.Room.Room_Opens_at__c}"
+                              RoomClosesAt="{!v.Room.Room_Closes_at__c}"
+                              TodayMeetings="{!v.TodayMeetings}"/>
+    </aura:If>
 </aura:component>
