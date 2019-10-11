@@ -4,19 +4,22 @@
 
 <aura:component description="TimeScaleComponent">
 
+    <aura:attribute name="date" type="String"/>
     <aura:attribute name="RoomOpensAt" type="Time"/>
     <aura:attribute name="RoomClosesAt" type="Time"/>
     <aura:attribute name="TodayMeetings" type="List"/>
     <aura:attribute name="parts" type="List"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.formDayList}"/>
+    <aura:handler name="change" value="{!v.date}" action="{!c.formDayList}"/>
 
     <aura:iteration var="partOfScale" items="{!v.parts}">
         <div class="slds-border--bottom">
             <c:ScalePartComponent isMeeting="{!partOfScale.isMeeting}"
                                   size="{!partOfScale.size}"
-                                  startTime="{!partOfScale.startTime}"/>
-<!--            <br/>-->
+                                  startTime="{!partOfScale.startTime}"
+                                  endTime="{!partOfScale.endTime}"
+                                  meeting="{!partOfScale.meeting}"/>
         </div>
     </aura:iteration>
 

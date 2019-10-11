@@ -3,7 +3,7 @@
  */
 
 ({
-  getRoomAndTodayMeetings: function(cmp) {
+  getRoom: function(cmp) {
     const roomId = cmp.get("v.recordId");
     const requestCmp = cmp.find("requestCmp");
 
@@ -17,6 +17,9 @@
   },
 
   getMeetingsForCurrentDate: function(cmp, event) {
+    if (cmp.get("v.renderScale") === true) {
+      cmp.set("v.renderScale", false);
+    }
     const currDate = event.getParam("currentDate");
     cmp.set("v.currentDate", currDate);
 
@@ -28,6 +31,9 @@
       { currDate: currDate, roomId: roomId }
     ).then(function(result) {
       cmp.set("v.TodayMeetings", result);
+      if (cmp.get("v.renderScale") === false) {
+        cmp.set("v.renderScale", true);
+      }
     });
   }
 });

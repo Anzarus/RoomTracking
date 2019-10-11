@@ -14,7 +14,13 @@
     const meetingsByStartTime = helper.formMeetingsByStartTime(meetings);
 
     for (let i = timeBegin; i < timeEnd;) {
-      let partOfScale = { isMeeting: false, size: 0, startTime: i };
+      let partOfScale = {
+        isMeeting: false,
+        size: 0,
+        startTime: i,
+        endTime: 0,
+        meeting: null
+      };
       if (meetingsByStartTime.has(i)) {
         i = this.setMeetingCmp(i, meetingsByStartTime, timeScaleDivision, partOfScale);
       } else {
@@ -43,6 +49,8 @@
     }
     partOfScale.isMeeting = true;
     partOfScale.size = counter;
+    partOfScale.endTime = i;
+    partOfScale.meeting = meetingsByStartTime.get(meetingStartAt);
     return i;
   },
 
@@ -54,6 +62,7 @@
     }
     partOfScale.isMeeting = false;
     partOfScale.size = counter;
+    partOfScale.endTime = i;
     return i;
   }
 });

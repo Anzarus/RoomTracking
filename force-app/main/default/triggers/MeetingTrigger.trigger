@@ -4,8 +4,11 @@
 
 trigger MeetingTrigger on Meeting__c (before insert, before update) {
     if (Trigger.isBefore) {
-        if (Trigger.isInsert || Trigger.isUpdate) {
-            new MeetingTriggerHandler().checkIsDateAndTimeAreFree(Trigger.new);
+        if (Trigger.isInsert) {
+            new MeetingTriggerHandler().checkIsDateAndTimeAreFreeOnInsert(Trigger.new);
+        }
+        if (Trigger.isUpdate) {
+            new MeetingTriggerHandler().checkIsDateAndTimeAreFreeOnUpdate(Trigger.new);
         }
     }
 }

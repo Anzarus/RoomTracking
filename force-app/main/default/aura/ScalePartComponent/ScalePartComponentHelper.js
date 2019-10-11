@@ -5,17 +5,16 @@
 ({
   formScale: function(cmp, helper) {
     const startTime = cmp.get("v.startTime");
+    const endTime = cmp.get("v.endTime");
     const size = cmp.get("v.size");
-    const timeScaleDivision = 900000; //15 min
 
     let scaleDivisions = [];
-    for (let i = 0; i < size; i++) {
-      if (i % 2 === 0) {
-        scaleDivisions.push(helper.msToTime(startTime + timeScaleDivision * i));
-      } else {
-        scaleDivisions.push("");
-      }
+    scaleDivisions.push(helper.msToTime(startTime));
+    if (size > 1) {
+      scaleDivisions.push("...");
     }
+    scaleDivisions.push(helper.msToTime(endTime));
+
     cmp.set("v.TimeScaleDivisions", scaleDivisions);
   },
 
@@ -35,5 +34,26 @@
       result = "0" + result;
     }
     return result;
+  },
+
+  getOwnerOfMeeting: function(cmp) {
+    if (cmp.get("v.meeting") !== null) {
+      const ownerId = cmp.get("v.meeting.CreatedById");
+      const requestCmp = cmp.find("requestCmp");
+
+      requestCmp.requestPromise(
+        "getOwnerInfo", { ownerId: ownerId }
+      ).then(function(result) {
+        cmp.set("v.owner", result);
+      });
+    }
+  },
+
+  showRecord:function(recordId){
+    const navigateEvent = $A.get("e.force:navigateToSObject");
+    navigateEvent.setParams({
+      "recordId":recordId
+    });
+    navigateEvent.fire();
   }
 });

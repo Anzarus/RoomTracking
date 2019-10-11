@@ -66,6 +66,26 @@ private class MeetingTriggerHandlerTest {
     }
 
     @IsTest
+    static void testCorrectUpdatingMeeting() {
+        List<Meeting__c> meetings = [
+                SELECT Name,
+                        Starts_at__c,
+                        Ends_at__c,
+                        Room__c
+                FROM Meeting__c
+                LIMIT 4
+        ];
+
+        for (Meeting__c meeting : meetings) {
+            meeting.Name = 'new';
+            meeting.Ends_at__c = meeting.Ends_at__c.addMinutes(15);
+        }
+        update meetings;
+
+        System.assertEquals(4, [SELECT Id FROM Meeting__c WHERE When__c = :Date.today().addMonths(1) AND Name = 'new'].size());
+    }
+
+    @IsTest
     static void testSettingMeetingInsideExistMeetingTime() {
         Room__c room = [
                 SELECT Id

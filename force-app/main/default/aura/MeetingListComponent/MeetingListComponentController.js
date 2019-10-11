@@ -4,7 +4,7 @@
 
 ({
   doInit: function(cmp, event, helper) {
-    helper.getRoomAndTodayMeetings(cmp);
+    helper.getRoom(cmp);
   },
 
   handleDateEvent:function(cmp, event, helper) {

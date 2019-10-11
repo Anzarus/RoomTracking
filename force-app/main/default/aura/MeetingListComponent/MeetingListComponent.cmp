@@ -11,7 +11,7 @@
     <aura:attribute name="Room" type="Room__c"/>
     <aura:attribute name="TodayMeetings" type="List"/>
     <aura:attribute name="currentDate" type="String"/>
-    <aura:attribute name="renderScale" type="Boolean" default="false"/>
+    <aura:attribute name="renderScale" type="Boolean"/>
 
     <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
     <aura:handler name="currentDateEvent" event="c:SendDateEvent" action="{!c.handleDateEvent}"/>
@@ -21,7 +21,8 @@
         <c:DateChangeComponent/>
 
         <aura:If isTrue="{!v.renderScale}">
-            <c:TimeScaleComponent RoomOpensAt="{!v.Room.Room_Opens_at__c}"
+            <c:TimeScaleComponent date="{!v.currentDate}"
+                                  RoomOpensAt="{!v.Room.Room_Opens_at__c}"
                                   RoomClosesAt="{!v.Room.Room_Closes_at__c}"
                                   TodayMeetings="{!v.TodayMeetings}"/>
         </aura:If>

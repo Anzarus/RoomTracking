@@ -2,20 +2,24 @@
  - Created by AntonAntoniuk on 11.10.2019.
  -->
 
-<aura:component description="ScalePartComponent">
+<aura:component description="ScalePartComponent"
+                controller="ScalePartComponentController">
+
+    <c:RequestComponent aura:id="requestCmp" parentCmp="{!this}"/>
 
     <aura:attribute name="isMeeting" type="Boolean"/>
     <aura:attribute name="size" type="Integer"/>
     <aura:attribute name="startTime" type="Integer"/>
+    <aura:attribute name="endTime" type="Integer"/>
     <aura:attribute name="TimeScaleDivisions" type="List"/>
+    <aura:attribute name="meeting" type="Meeting__c"/>
+    <aura:attribute name="owner" type="User"/>
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
-
-    <!--        <div class="slds-col slds-nowrap">-->
-    <div class="slds-grid ">
+    <div class="slds-grid">
         <div class="slds-nowrap slds-list_horizontal">
-            <div class="slds-col slds-size_1-of-12">
+            <div class="slds-col slds-size_1-of-6">
                 <div class="slds-border_right slds-text-align_center">
                     <aura:iteration var="scaleDiv" items="{!v.TimeScaleDivisions}">
                         {!scaleDiv} <br/>
@@ -23,12 +27,32 @@
                 </div>
             </div>
 
-            <div class="slds-col slds-size_11-of-12">
+            <div class="slds-col slds-size_5-of-6">
                 <aura:if isTrue="{!v.isMeeting}">
-                    Busy
-                    <aura:set attribute="else">
-                        Open
-                    </aura:set>
+                    <div class="slds-box slds-box--border custom-class-style-brand-background custom-class-style-fill-block">
+                        <div class="slds-nowrap slds-list_horizontal slds-grid_vertical-align-center"><!--todo make to center when 3-->
+                            <div class="slds-col slds-size_1-of-3 slds-text-align--center">
+                                <h1 class="slds-text-color--inverse slds-text-heading--large">BUSY</h1>
+                            </div>
+                            <div class="slds-col slds-size_2-of-3">
+                                <div class="slds-text-color--inverse slds-grid_vertical">
+                                    <div class="slds-col">
+                                        <h6 onclick="{!c.showMeeting}"><!--onblur="{!c.showMeetingInfo}"-->
+                                            {!v.meeting.Name}
+                                        </h6>
+                                    </div>
+                                    <div class="slds-col">
+                                        <h6 onclick="{!c.showOwner}"> <!--onblur="{!c.showOwnerInfo}"-->
+                                            {!v.owner.LastName +' '+ v.owner.FirstName}
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<aura:set attribute="else">
+                        <h1 class="custom-class-style-blue-text slds-text-heading&#45;&#45;large">Open</h1>
+                    </aura:set>-->
                 </aura:if>
             </div>
         </div>

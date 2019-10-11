@@ -1,0 +1,16 @@
+/**
+ * Created by AntonAntoniuk on 11.10.2019.
+ */
+
+.THIS .custom-class-style-brand-background {
+    background: #1b5297;
+}
+
+.THIS .custom-class-style-blue-text {
+    color: blue;
+}
+
+.THIS .custom-class-style-fill-block {
+    display: block;
+    height: 100%;
+}
