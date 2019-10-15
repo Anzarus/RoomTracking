@@ -1,0 +1,30 @@
+<!--
+ - Created by AntonAntoniuk on 15.10.2019.
+ -->
+
+<aura:component description="MeetingParticipatorsComponent"
+                implements="flexipage:availableForAllPageTypes, force:hasRecordId"
+                controller="MeetingParticipatorsComponentController">
+
+    <c:ShowToastComponent aura:id="toastCmp"/>
+    <c:RequestComponent aura:id="requestCmp" parentCmp="{!this}"/>
+
+    <aura:attribute name="Participators" type="List"/>
+    <aura:attribute name="isNotEmpty" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="force:refreshView" action="{!c.doInit}"/>
+    <aura:handler name="deleteUserFromParticipators" event="c:DeleteUserFromParticipators" action="{!c.handleEvent}"/>
+
+    <aura:if isTrue="{!v.isNotEmpty}">
+        <div class="slds-card">
+            <aura:iteration var="participator" items="{!v.Participators}">
+                <c:ParticipatorBadgeComponent participator="{!participator}"/>
+            </aura:iteration>
+            <div class="slds-border_top slds-align_absolute-center">
+                    <lightning:button label="Clear" variant="destructive" onclick="{!c.clear}"/>
+                    <lightning:button label="Send Emails" variant="brand" onclick="{!c.logParticipators}"/>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

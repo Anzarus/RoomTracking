@@ -1,0 +1,7 @@
+<!--
+ - Created by AntonAntoniuk on 15.10.2019.
+ -->
+
+<aura:event type="COMPONENT" description="DeleteUserFromParticipators">
+    <aura:attribute name="userId" type="String"/>
+</aura:event>

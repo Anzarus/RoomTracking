@@ -6,6 +6,21 @@
     </applicationVisibilities>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Meeting_Participators_Log__c.IsDeleted__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Meeting_Participators_Log__c.User__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Meeting__c.Count_of_Employees__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Participator__c.User__c</field>
         <readable>false</readable>
     </fieldPermissions>
