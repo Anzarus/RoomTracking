@@ -43,7 +43,7 @@ public with sharing class ParticipatorTriggerHandler {
         List<Meeting_Participators_Log__c> participatorsLogs = [
                 SELECT Id, IsDeleted__c
                 FROM Meeting_Participators_Log__c
-                WHERE User__c = :userIds AND Meeting__c = :meetingIds
+                WHERE User__c = :userIds AND Meeting__c = :meetingIds AND IsDeleted__c = FALSE
         ];
 
         for (Meeting_Participators_Log__c meetingParticipatorsLog : participatorsLogs) {

@@ -23,9 +23,9 @@ public with sharing class MeetingParticipatorsComponentController {
     }
 
     @AuraEnabled
-    public static void logParticipators(String meetingId) {
+    public static void createLogParticipators(String meetingId) {
         List<Participator__c> participators = [
-                SELECT User__c
+                SELECT User__c, Meeting__c
                 FROM Participator__c
                 WHERE Meeting__c = :meetingId
         ];
@@ -34,10 +34,17 @@ public with sharing class MeetingParticipatorsComponentController {
         for (Participator__c participator : participators) {
             participatorsLogs.add(new Meeting_Participators_Log__c(
                     Meeting__c = participator.Meeting__c,
-                    User__c = participator.User__c
+                    User__c = participator.User__c,
+                    IsDeleted__c = false
             ));
         }
+        System.debug(participatorsLogs);
         insert participatorsLogs;
+        System.debug([
+                SELECT User__c, Meeting__c, IsDeleted__c
+                FROM Meeting_Participators_Log__c
+                WHERE Meeting__c = :meetingId
+        ]);
     }
 
     @AuraEnabled

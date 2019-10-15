@@ -82,6 +82,27 @@ public with sharing class MeetingTriggerHandler {
         }
     }
 
+    public void blockIfThereAnyUsers(List<Meeting__c> oldMeetings) {
+        Map<Id, Meeting__c> oldMeetingsByIds = new Map<Id, Meeting__c>(oldMeetings);
+
+        List<Participator__c> participators = [
+                SELECT Id, Meeting__c
+                FROM Participator__c
+                WHERE Meeting__c = :oldMeetingsByIds.keySet()
+        ];
+
+        Set<Id> existParticipatorsOldMeetings = new Set<Id>();
+        for (Participator__c participator : participators) {
+            existParticipatorsOldMeetings.add(participator.Meeting__c);
+        }
+
+        for (Id meetingId : oldMeetingsByIds.keySet()) {
+            if (existParticipatorsOldMeetings.contains(meetingId)) {
+                throw new MeetingException('You should remove all Participators before!');
+            }
+        }
+    }
+
     @TestVisible
     class MeetingException extends Exception {
     }

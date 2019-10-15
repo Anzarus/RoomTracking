@@ -22,7 +22,7 @@
     const requestCmp = cmp.find("requestCmp");
 
     requestCmp.requestPromise(
-      "logParticipators",
+      "createLogParticipators",
       { meetingId: meetingId }
     ).then(function() {
       const toastCmp = cmp.find("toastCmp");
