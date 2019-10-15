@@ -1,0 +1,6 @@
+Hi {!User.Name} !
+You have been invited to Meeting on {!Meeting__c.When__c} from {!Meeting__c.Starts_at__c} to {!Meeting__c.Ends_at__c} at room {!Room__c.Name}.
+I hope you will join us.
+{!Meeting__c.Link}
+See you soon!
+{!Meeting__c.CreatedBy}

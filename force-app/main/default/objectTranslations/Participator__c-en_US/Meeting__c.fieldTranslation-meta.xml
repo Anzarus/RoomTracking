@@ -2,5 +2,5 @@
 <CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <label><!-- Meeting --></label>
     <name>Meeting__c</name>
-    <relationshipLabel><!-- Participators --></relationshipLabel>
+    <relationshipLabel><!-- Meeting Participators Logs --></relationshipLabel>
 </CustomFieldTranslation>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Send_Email_Notification_About_Changing_Meeting</fullName>
+        <description>Send Email Notification About Changing Meeting</description>
+        <protected>false</protected>
+        <recipients>
+            <field>User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Notification_about_changing</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_Notification_About_Deleting_From_Meeting</fullName>
+        <description>Send Email Notification About Deleting From Meeting</description>
+        <protected>false</protected>
+        <recipients>
+            <field>User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Notification_about_Deleting_from_Meeting</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_Notification_About_Meeting</fullName>
+        <description>Send Email Notification About Meeting</description>
+        <protected>false</protected>
+        <recipients>
+            <field>User__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Notification_about_Meeting</template>
+    </alerts>
+</Workflow>
