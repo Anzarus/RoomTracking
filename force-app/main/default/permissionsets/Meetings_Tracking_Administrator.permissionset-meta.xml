@@ -4,6 +4,11 @@
         <application>Meeting_Tracking</application>
         <visible>true</visible>
     </applicationVisibilities>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Participator__c.User__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Meetings Tracking Administrator</label>
     <objectPermissions>

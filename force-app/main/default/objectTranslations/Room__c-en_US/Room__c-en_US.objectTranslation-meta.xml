@@ -8,6 +8,21 @@
         <plural>true</plural>
         <value>Rooms</value>
     </caseValues>
+    <layouts>
+        <layout>Room Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Open Time --></label>
+            <section>Open Time</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Create New Meeting --></label>
+        <name>New_Meeting</name>
+    </quickActions>
     <startsWith>Consonant</startsWith>
     <validationRules>
         <errorMessage><!-- Room closes time should be after room opens time --></errorMessage>

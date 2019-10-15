@@ -14,3 +14,8 @@
     display: block;
     height: 100%;
 }
+
+.THIS .custom-class-style-link {
+    color:white ;
+    -webkit-text-fill-color: white;
+}

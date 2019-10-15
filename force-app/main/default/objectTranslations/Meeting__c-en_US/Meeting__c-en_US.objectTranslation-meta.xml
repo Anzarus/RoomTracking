@@ -8,6 +8,17 @@
         <plural>true</plural>
         <value>Meetings</value>
     </caseValues>
+    <layouts>
+        <layout>Meeting Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Add Users --></label>
+        <name>Add_Users</name>
+    </quickActions>
     <startsWith>Consonant</startsWith>
     <validationRules>
         <errorMessage><!-- End time of meeting should be before room closes --></errorMessage>

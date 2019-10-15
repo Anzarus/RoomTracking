@@ -30,29 +30,26 @@
             <div class="slds-col slds-size_5-of-6">
                 <aura:if isTrue="{!v.isMeeting}">
                     <div class="slds-box slds-box--border custom-class-style-brand-background custom-class-style-fill-block">
-                        <div class="slds-nowrap slds-list_horizontal slds-grid_vertical-align-center"><!--todo make to center when 3-->
+                        <div class="slds-nowrap slds-list_horizontal">
                             <div class="slds-col slds-size_1-of-3 slds-text-align--center">
                                 <h1 class="slds-text-color--inverse slds-text-heading--large">BUSY</h1>
                             </div>
                             <div class="slds-col slds-size_2-of-3">
-                                <div class="slds-text-color--inverse slds-grid_vertical">
-                                    <div class="slds-col">
-                                        <h6 onclick="{!c.showMeeting}"><!--onblur="{!c.showMeetingInfo}"-->
+                                <div class="slds-grid_vertical custom-class-style-link">
+                                    <div class="slds-col ">
+                                        <a href="" onclick="{!c.showMeeting}">
                                             {!v.meeting.Name}
-                                        </h6>
+                                        </a>
                                     </div>
                                     <div class="slds-col">
-                                        <h6 onclick="{!c.showOwner}"> <!--onblur="{!c.showOwnerInfo}"-->
+                                        <a href="" onclick="{!c.showOwner}">
                                             {!v.owner.LastName +' '+ v.owner.FirstName}
-                                        </h6>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--<aura:set attribute="else">
-                        <h1 class="custom-class-style-blue-text slds-text-heading&#45;&#45;large">Open</h1>
-                    </aura:set>-->
                 </aura:if>
             </div>
         </div>
