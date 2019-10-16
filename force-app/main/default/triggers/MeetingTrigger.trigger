@@ -9,6 +9,7 @@ trigger MeetingTrigger on Meeting__c (before insert, before update, before delet
         }
         if (Trigger.isUpdate) {
             new MeetingTriggerHandler().checkIsDateAndTimeAreFreeOnUpdate(Trigger.new);
+            new MeetingTriggerHandler().sendNotificationToParticipators(Trigger.new);
         }
         if (Trigger.isDelete) {
             new MeetingTriggerHandler().blockIfThereAnyUsers(Trigger.old);

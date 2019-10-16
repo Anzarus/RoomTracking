@@ -82,6 +82,15 @@ public with sharing class MeetingTriggerHandler {
         }
     }
 
+    public void sendNotificationToParticipators(List<Meeting__c> updatedMeetings) {
+        Set<Id> meetingIds = new Set<Id>();
+        for (Meeting__c meeting : updatedMeetings) {
+            meetingIds.add(meeting.Id);
+        }
+
+        SendNotificationAboutMeetingChanges.sendEmails(meetingIds);
+    }
+
     public void blockIfThereAnyUsers(List<Meeting__c> oldMeetings) {
         Map<Id, Meeting__c> oldMeetingsByIds = new Map<Id, Meeting__c>(oldMeetings);
 

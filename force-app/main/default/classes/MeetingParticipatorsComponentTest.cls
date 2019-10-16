@@ -9,8 +9,7 @@ private class MeetingParticipatorsComponentTest {
         UnitOfWork unitOfWork = new UnitOfWork(new Set<SObjectType>{
                 User.SObjectType,
                 Room__c.SObjectType,
-                Meeting__c.SObjectType,
-                Participator__c.SObjectType
+                Meeting__c.SObjectType
         });
 
         Profile profile = [
