@@ -6,6 +6,7 @@
   getRoom: function(cmp) {
     const roomId = cmp.get("v.recordId");
     const requestCmp = cmp.find("requestCmp");
+    const toastCmp = cmp.find("toastCmp");
 
     requestCmp.requestPromise(
       "getCurrentRoom",
@@ -13,6 +14,9 @@
     ).then(function(result) {
       cmp.set("v.Room", result);
       cmp.set("v.renderScale", true);
+    }).catch(function(errors) {
+      let errorMessage = errors[0].message;
+      toastCmp.showToast("Error", errorMessage, "error");
     });
   },
 
@@ -25,6 +29,7 @@
 
     const roomId = cmp.get("v.recordId");
     const requestCmp = cmp.find("requestCmp");
+    const toastCmp = cmp.find("toastCmp");
 
     requestCmp.requestPromise(
       "getCurrentDayMeetings",
@@ -34,6 +39,9 @@
       if (cmp.get("v.renderScale") === false) {
         cmp.set("v.renderScale", true);
       }
+    }).catch(function(errors) {
+      let errorMessage = errors[0].message;
+      toastCmp.showToast("Error", errorMessage, "error");
     });
   }
 });

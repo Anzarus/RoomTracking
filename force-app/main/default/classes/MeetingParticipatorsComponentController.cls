@@ -38,13 +38,7 @@ public with sharing class MeetingParticipatorsComponentController {
                     IsDeleted__c = false
             ));
         }
-        System.debug(participatorsLogs);
         insert participatorsLogs;
-        System.debug([
-                SELECT User__c, Meeting__c, IsDeleted__c
-                FROM Meeting_Participators_Log__c
-                WHERE Meeting__c = :meetingId
-        ]);
     }
 
     @AuraEnabled

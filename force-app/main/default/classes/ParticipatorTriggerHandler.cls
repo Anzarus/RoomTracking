@@ -53,6 +53,7 @@ public with sharing class ParticipatorTriggerHandler {
         update participatorsLogs;
     }
 
+    @TestVisible
     private class ParticipatorTriggerHandlerException extends Exception {
     }
 }

@@ -205,4 +205,27 @@ private class MeetingTriggerHandlerTest {
         }
         System.assertEquals(true, dmlFail, 'You should choose another time cause it`s busy!');
     }
+
+    @IsTest
+    static void testBlockingDeletingIfThereAnyOfUsers() {
+        List<Meeting__c> meetings = [SELECT Id FROM Meeting__c];
+        User user = [SELECT Id FROM User LIMIT 1];
+
+        List<Participator__c> participators = new List<Participator__c>();
+        for (Integer i = meetings.size() / 2; i < meetings.size(); i++) {
+            participators.add(new Participator__c(
+                    Meeting__c = meetings[i].Id,
+                    User__c = user.Id
+            ));
+        }
+        insert participators;
+
+        Boolean exceptionScope;
+        try {
+            delete meetings;
+        } catch (Exception e) {
+            exceptionScope = true;
+        }
+        System.assertEquals(true, exceptionScope);
+    }
 }

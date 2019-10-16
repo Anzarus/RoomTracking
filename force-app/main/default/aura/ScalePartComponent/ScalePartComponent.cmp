@@ -6,6 +6,7 @@
                 controller="ScalePartComponentController">
 
     <c:RequestComponent aura:id="requestCmp" parentCmp="{!this}"/>
+    <c:ShowToastComponent aura:id="toastCmp"/>
 
     <aura:attribute name="isMeeting" type="Boolean"/>
     <aura:attribute name="size" type="Integer"/>

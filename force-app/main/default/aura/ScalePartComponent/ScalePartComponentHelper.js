@@ -40,11 +40,15 @@
     if (cmp.get("v.meeting") !== null) {
       const ownerId = cmp.get("v.meeting.CreatedById");
       const requestCmp = cmp.find("requestCmp");
+      const toastCmp = cmp.find("toastCmp");
 
       requestCmp.requestPromise(
         "getOwnerInfo", { ownerId: ownerId }
       ).then(function(result) {
         cmp.set("v.owner", result);
+      }).catch(function(errors) {
+        let errorMessage = errors[0].message;
+        toastCmp.showToast("Error", errorMessage, "error");
       });
     }
   },

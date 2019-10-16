@@ -7,6 +7,7 @@
                 implements="flexipage:availableForAllPageTypes, force:hasRecordId">
 
     <c:RequestComponent aura:id="requestCmp" parentCmp="{!this}"/>
+    <c:ShowToastComponent aura:id="toastCmp"/>
 
     <aura:attribute name="Room" type="Room__c"/>
     <aura:attribute name="TodayMeetings" type="List"/>
