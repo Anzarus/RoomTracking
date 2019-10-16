@@ -1,3 +1,4 @@
 Hi, {!User.Name}!
-Our meeting {!Meeting__c.Link} have some changes.
+Our meeting have some changes.
 Please pay attention!
+{!Meeting__c.Link}
